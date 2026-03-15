@@ -116,7 +116,10 @@ async function resolveStaticFile(urlPath) {
 
 const server = http.createServer(async (req, res) => {
   const method = req.method || "GET";
-  const requestUrl = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
+  const requestUrl = new URL(
+    req.url || "/",
+    `http://${req.headers.host || "localhost"}`,
+  );
 
   if (requestUrl.pathname === "/api/enquiries" && method === "POST") {
     try {
@@ -125,7 +128,10 @@ const server = http.createServer(async (req, res) => {
       const email = String(body.email || "").trim();
 
       if (!name || !email) {
-        return sendJson(res, 400, { ok: false, error: "name and email are required" });
+        return sendJson(res, 400, {
+          ok: false,
+          error: "name and email are required",
+        });
       }
 
       await appendEnquiry({
@@ -151,7 +157,10 @@ const server = http.createServer(async (req, res) => {
       const items = JSON.parse(raw);
       return sendJson(res, 200, { ok: true, data: items });
     } catch {
-      return sendJson(res, 500, { ok: false, error: "failed to read enquiries" });
+      return sendJson(res, 500, {
+        ok: false,
+        error: "failed to read enquiries",
+      });
     }
   }
 

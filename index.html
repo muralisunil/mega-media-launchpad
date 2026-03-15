@@ -20,13 +20,13 @@
     <style>
       :root {
         --bg: #060914;
-        --surface: #0e1528;
-        --surface-soft: #111d35;
+        --surface: #111111;
+        --surface-soft: #171717;
         --text: #eaf0ff;
-        --muted: #9faccc;
-        --primary: #6b8aff;
-        --primary-2: #60dbff;
-        --border: #22304d;
+        --muted: #a3a3a3;
+        --primary: #ff4f3d;
+        --primary-2: #ff7a3d;
+        --border: #262626;
       }
 
       * {
@@ -40,7 +40,7 @@
       body {
         margin: 0;
         font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-        background: radial-gradient(ellipse at top right, #162643 0%, var(--bg) 45%), var(--bg);
+        background: radial-gradient(ellipse at top right, rgba(255, 79, 61, 0.18) 0%, var(--bg) 45%), var(--bg);
         color: var(--text);
         line-height: 1.55;
       }
@@ -209,6 +209,106 @@
         padding: 22px;
       }
 
+      .service-card {
+        position: relative;
+        min-height: 320px;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        perspective: 1200px;
+      }
+
+      .service-card-inner {
+        position: relative;
+        min-height: 320px;
+        width: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease;
+      }
+
+      .service-card.is-flipped .service-card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .service-face {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 10px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 22px;
+        overflow: hidden;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+      }
+
+      .service-face.back {
+        transform: rotateY(180deg);
+        padding-bottom: 52px;
+      }
+
+      .service-card h3 {
+        font-size: 19px;
+      }
+
+      .service-flip {
+        position: static;
+        order: 99;
+        margin-top: auto;
+        align-self: flex-end;
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 1;
+        flex-shrink: 0;
+      }
+
+      .service-flip:hover {
+        background: rgba(255, 79, 61, 0.14);
+        border-color: rgba(255, 79, 61, 0.45);
+      }
+
+      .service-meta {
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .service-meta li {
+        font-size: 13px;
+        line-height: 1.45;
+      }
+
+      .service-note {
+        margin-top: 0;
+        padding-top: 10px;
+        padding-right: 44px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--primary-2);
+        font-weight: 600;
+        width: 100%;
+      }
+
+      .service-face.back .service-note {
+        position: absolute;
+        left: 22px;
+        right: 22px;
+        bottom: 14px;
+      }
+
       .card h3 {
         margin-bottom: 8px;
         font-size: 20px;
@@ -218,6 +318,7 @@
         font-size: clamp(34px, 5vw, 56px);
         background: linear-gradient(90deg, var(--primary), var(--primary-2));
         -webkit-background-clip: text;
+        background-clip: text;
         color: transparent;
         font-family: Lexend, Inter, sans-serif;
         font-weight: 800;
@@ -228,12 +329,41 @@
       }
 
       .results-grid .card {
-        background: linear-gradient(90deg, #4f71ff, #5ecdf0);
+        background: linear-gradient(90deg, var(--primary), var(--primary-2));
         color: #fff;
       }
 
       .results-grid .muted {
         color: rgba(255, 255, 255, 0.86);
+      }
+
+      .testimonials-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .testimonial-quote {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .testimonial-meta {
+        margin-top: auto;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .testimonial-name {
+        display: block;
+        font-weight: 700;
+      }
+
+      .testimonial-role {
+        display: block;
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 13px;
       }
 
       details {
@@ -344,6 +474,10 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .testimonials-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .menu {
           display: none;
         }
@@ -361,6 +495,7 @@
         .stats-grid,
         .process-grid,
         .results-grid,
+        .testimonials-grid,
         .footer-grid {
           grid-template-columns: 1fr;
         }
@@ -372,6 +507,11 @@
 
         .contact-grid {
           grid-template-columns: 1fr;
+        }
+
+        .service-card,
+        .service-card-inner {
+          min-height: 300px;
         }
       }
     </style>
@@ -439,8 +579,8 @@
         <div class="container">
           <p class="eyebrow">Trusted by ambitious brands worldwide</p>
           <div class="logos">
-            <span>TechFlow</span>
-            <span>GreenScale</span>
+            <span>Desi Pantry</span>
+            <span>Shubham Cash 'n' Carry</span>
             <span>NovaEdge</span>
             <span>PulseHQ</span>
             <span>Arclight</span>
@@ -451,20 +591,229 @@
       <section id="services">
         <div class="container">
           <p class="eyebrow">What We Do</p>
-          <h2>Full-spectrum digital marketing, executed with precision.</h2>
+          <span>
+            <h2>Full-spectrum digital marketing,</h2>
+          </span>
+          <span>
+            <h2>executed with precision.</h2>
+          </span>
           <div class="grid services-grid" style="margin-top: 28px">
-            <article class="card"><h3>SEO & Search</h3><p class="muted">Dominate organic rankings with data-driven strategies that drive qualified traffic and long-term growth.</p></article>
-            <article class="card"><h3>Paid Media & PPC</h3><p class="muted">Maximize ROI with precision-targeted campaigns across Google, Meta, and programmatic channels.</p></article>
-            <article class="card"><h3>Social Media Marketing</h3><p class="muted">Build engaged communities and convert followers into customers with strategic social campaigns.</p></article>
-            <article class="card"><h3>Content Creation</h3><p class="muted">From blogs and video to infographics and podcasts — compelling content that captures attention and drives action.</p></article>
-            <article class="card"><h3>Content Strategy</h3><p class="muted">Craft data-backed editorial roadmaps that position your brand as the authority in your industry.</p></article>
-            <article class="card"><h3>AI Optimization</h3><p class="muted">Leverage AI-powered tools for predictive analytics, smart bidding, automated personalization, and campaign optimization.</p></article>
-            <article class="card"><h3>Web Development</h3><p class="muted">High-performance websites engineered for conversion, speed, and seamless user experience.</p></article>
-            <article class="card"><h3>Analytics & Reporting</h3><p class="muted">Transparent, real-time dashboards so you see exactly where every dollar delivers impact.</p></article>
-            <article class="card"><h3>Influencer Marketing</h3><p class="muted">Connect with the right voices to amplify your brand reach and build authentic trust at scale.</p></article>
-            <article class="card"><h3>International SEO & Localization</h3><p class="muted">Expand into new markets with multilingual SEO, localized content, and geo-targeted strategies.</p></article>
-            <article class="card"><h3>Brand Strategy & Identity</h3><p class="muted">Define your brand's voice, visual identity, and positioning to stand out in crowded markets.</p></article>
-            <article class="card"><h3>Conversion Rate Optimization</h3><p class="muted">Turn more visitors into customers through A/B testing, UX audits, and funnel optimization.</p></article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip SEO & Search card" aria-pressed="false">⟲</button>
+                  <h3>SEO & Search</h3>
+                  <p class="muted">Dominate organic rankings with data-driven strategies that drive qualified traffic and long-term growth.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip SEO & Search card back" aria-pressed="true">⟲</button>
+                  <h3>SEO & Search</h3>
+                  <ul class="service-meta">
+                    <li>Technical audits, on-page fixes, and keyword mapping.</li>
+                    <li>Ideal for brands that want compounding traffic growth.</li>
+                  </ul>
+                  <p class="service-note">Best when paired with content strategy and CRO.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Paid Media card" aria-pressed="false">⟲</button>
+                  <h3>Paid Media & PPC</h3>
+                  <p class="muted">Maximize ROI with precision-targeted campaigns across Google, Meta, and programmatic channels.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Paid Media card back" aria-pressed="true">⟲</button>
+                  <h3>Paid Media & PPC</h3>
+                  <ul class="service-meta">
+                    <li>Campaign setup, audience testing, and landing-page alignment.</li>
+                    <li>Useful for fast lead generation and controlled scaling.</li>
+                  </ul>
+                  <p class="service-note">Strong fit for launches, promotions, and demand capture.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Social Media Marketing card" aria-pressed="false">⟲</button>
+                  <h3>Social Media Marketing</h3>
+                  <p class="muted">Build engaged communities and convert followers into customers with strategic social campaigns.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Social Media Marketing card back" aria-pressed="true">⟲</button>
+                  <h3>Social Media Marketing</h3>
+                  <ul class="service-meta">
+                    <li>Content calendars, community management, and paid social support.</li>
+                    <li>Useful for brand awareness, trust building, and retention.</li>
+                  </ul>
+                  <p class="service-note">Works best with consistent creative production.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Content Creation card" aria-pressed="false">⟲</button>
+                  <h3>Content Creation</h3>
+                  <p class="muted">From blogs and video to infographics and podcasts — compelling content that captures attention and drives action.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Content Creation card back" aria-pressed="true">⟲</button>
+                  <h3>Content Creation</h3>
+                  <ul class="service-meta">
+                    <li>Blog articles, ad creatives, short-form video, and branded assets.</li>
+                    <li>Useful for filling funnels with reusable campaign material.</li>
+                  </ul>
+                  <p class="service-note">Supports SEO, email, social, and paid campaigns.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Content Strategy card" aria-pressed="false">⟲</button>
+                  <h3>Content Strategy</h3>
+                  <p class="muted">Craft data-backed editorial roadmaps that position your brand as the authority in your industry.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Content Strategy card back" aria-pressed="true">⟲</button>
+                  <h3>Content Strategy</h3>
+                  <ul class="service-meta">
+                    <li>Topic clusters, funnel mapping, and publishing priorities.</li>
+                    <li>Useful when content feels inconsistent or underperforming.</li>
+                  </ul>
+                  <p class="service-note">Turns content into a repeatable growth system.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip AI Optimization card" aria-pressed="false">⟲</button>
+                  <h3>AI Optimization</h3>
+                  <p class="muted">Leverage AI-powered tools for predictive analytics, smart bidding, automated personalization, and campaign optimization.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip AI Optimization card back" aria-pressed="true">⟲</button>
+                  <h3>AI Optimization</h3>
+                  <ul class="service-meta">
+                    <li>Workflow automation, prompt systems, and optimization models.</li>
+                    <li>Useful for teams that need faster execution with better insights.</li>
+                  </ul>
+                  <p class="service-note">Ideal for scaling operations without scaling headcount.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Web Development card" aria-pressed="false">⟲</button>
+                  <h3>Web Development</h3>
+                  <p class="muted">High-performance websites engineered for conversion, speed, and seamless user experience.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Web Development card back" aria-pressed="true">⟲</button>
+                  <h3>Web Development</h3>
+                  <ul class="service-meta">
+                    <li>Landing pages, conversion flows, responsive builds, and technical cleanup.</li>
+                    <li>Useful when traffic is there but the website is leaking conversions.</li>
+                  </ul>
+                  <p class="service-note">Built to support both marketing and long-term maintenance.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Analytics & Reporting card" aria-pressed="false">⟲</button>
+                  <h3>Analytics & Reporting</h3>
+                  <p class="muted">Transparent, real-time dashboards so you see exactly where every dollar delivers impact.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Analytics & Reporting card back" aria-pressed="true">⟲</button>
+                  <h3>Analytics & Reporting</h3>
+                  <ul class="service-meta">
+                    <li>Tracking setup, dashboard design, and attribution review.</li>
+                    <li>Useful for leaders who need clean visibility across channels.</li>
+                  </ul>
+                  <p class="service-note">Clear reporting makes faster, better budget decisions.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Influencer Marketing card" aria-pressed="false">⟲</button>
+                  <h3>Influencer Marketing</h3>
+                  <p class="muted">Connect with the right voices to amplify your brand reach and build authentic trust at scale.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Influencer Marketing card back" aria-pressed="true">⟲</button>
+                  <h3>Influencer Marketing</h3>
+                  <ul class="service-meta">
+                    <li>Creator sourcing, outreach, briefs, and campaign tracking.</li>
+                    <li>Useful for social proof, launches, and category credibility.</li>
+                  </ul>
+                  <p class="service-note">Best with strong offers and reusable creative hooks.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip International SEO & Localization card" aria-pressed="false">⟲</button>
+                  <h3>International SEO & Localization</h3>
+                  <p class="muted">Expand into new markets with multilingual SEO, localized content, and geo-targeted strategies.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip International SEO & Localization card back" aria-pressed="true">⟲</button>
+                  <h3>International SEO & Localization</h3>
+                  <ul class="service-meta">
+                    <li>Market targeting, hreflang strategy, and localization planning.</li>
+                    <li>Useful for brands entering new regions without wasting spend.</li>
+                  </ul>
+                  <p class="service-note">Critical when growth depends on multilingual discoverability.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Brand Strategy & Identity card" aria-pressed="false">⟲</button>
+                  <h3>Brand Strategy & Identity</h3>
+                  <p class="muted">Define your brand's voice, visual identity, and positioning to stand out in crowded markets.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Brand Strategy & Identity card back" aria-pressed="true">⟲</button>
+                  <h3>Brand Strategy & Identity</h3>
+                  <ul class="service-meta">
+                    <li>Messaging frameworks, tone of voice, visual direction, and positioning.</li>
+                    <li>Useful when the offer is strong but the brand feels generic.</li>
+                  </ul>
+                  <p class="service-note">A sharper brand makes every channel work harder.</p>
+                </div>
+              </div>
+            </article>
+            <article class="service-card" data-service-card>
+              <div class="service-card-inner">
+                <div class="service-face front">
+                  <button class="service-flip" type="button" aria-label="Flip Conversion Rate Optimization card" aria-pressed="false">⟲</button>
+                  <h3>Conversion Rate Optimization</h3>
+                  <p class="muted">Turn more visitors into customers through A/B testing, UX audits, and funnel optimization.</p>
+                </div>
+                <div class="service-face back">
+                  <button class="service-flip" type="button" aria-label="Flip Conversion Rate Optimization card back" aria-pressed="true">⟲</button>
+                  <h3>Conversion Rate Optimization</h3>
+                  <ul class="service-meta">
+                    <li>Heatmaps, experiments, offer testing, and funnel diagnosis.</li>
+                    <li>Useful when traffic acquisition is solid but close rates lag.</li>
+                  </ul>
+                  <p class="service-note">Often the fastest path to more revenue from existing traffic.</p>
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -503,6 +852,42 @@
             <article class="card"><h3>+340%</h3><p class="muted"><strong>Organic Traffic</strong><br />E-commerce brand scaled organic sessions in 8 months with technical SEO and content.</p></article>
             <article class="card"><h3>5x</h3><p class="muted"><strong>Return on Ad Spend</strong><br />SaaS startup achieved 5x ROAS through precision-targeted Google and LinkedIn campaigns.</p></article>
             <article class="card"><h3>+220%</h3><p class="muted"><strong>Lead Generation</strong><br />B2B services firm tripled qualified leads with integrated paid and organic strategy.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials">
+        <div class="container">
+          <p class="eyebrow">Testimonials</p>
+          <h2>What our clients say about working with us.</h2>
+          <div class="grid testimonials-grid" style="margin-top: 28px">
+            <article class="card" style="display: flex; flex-direction: column; gap: 12px">
+              <p class="testimonial-quote">
+                “Mega Media helped us rebuild our SEO foundation and paid strategy in parallel. Within a quarter, lead quality improved and our cost per acquisition dropped significantly.”
+              </p>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Priya Raman</span>
+                <span class="testimonial-role">Marketing Director, Desi Pantry</span>
+              </div>
+            </article>
+            <article class="card" style="display: flex; flex-direction: column; gap: 12px">
+              <p class="testimonial-quote">
+                “Their team is fast, structured, and transparent. We always know what is being tested, what is working, and where we should invest next.”
+              </p>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Shubham Patel</span>
+                <span class="testimonial-role">Owner, Shubham Cash 'n' Carry</span>
+              </div>
+            </article>
+            <article class="card" style="display: flex; flex-direction: column; gap: 12px">
+              <p class="testimonial-quote">
+                “From website conversion improvements to campaign optimization, the impact was immediate. We finally have a growth partner, not just a vendor.”
+              </p>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Arjun Mehta</span>
+                <span class="testimonial-role">Founder, NovaEdge</span>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -625,9 +1010,33 @@
     </footer>
 
     <script>
+      const serviceCards = document.querySelectorAll("[data-service-card]");
       const enquiryForm = document.getElementById("enquiry-form");
       const submitButton = document.getElementById("submit-btn");
       const formStatus = document.getElementById("form-status");
+
+      const setServiceCardState = (card, isFlipped) => {
+        card.classList.toggle("is-flipped", isFlipped);
+        card.querySelectorAll(".service-flip").forEach((flipButton) => {
+          flipButton.setAttribute("aria-pressed", String(isFlipped));
+        });
+      };
+
+      serviceCards.forEach((card) => {
+        card.querySelectorAll(".service-flip").forEach((button) => {
+          button.addEventListener("click", () => {
+            const shouldFlipOpen = !card.classList.contains("is-flipped");
+
+            serviceCards.forEach((otherCard) => {
+              if (otherCard !== card) {
+                setServiceCardState(otherCard, false);
+              }
+            });
+
+            setServiceCardState(card, shouldFlipOpen);
+          });
+        });
+      });
 
       enquiryForm.addEventListener("submit", async (event) => {
         event.preventDefault();
