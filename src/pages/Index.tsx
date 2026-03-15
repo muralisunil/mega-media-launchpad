@@ -25,7 +25,7 @@ const Index = () => {
       <Results />
       <FAQ />
       <EnquiryForm />
-      <Footer theme={theme} />
+      <Footer />
       <Toaster />
     </div>
   );

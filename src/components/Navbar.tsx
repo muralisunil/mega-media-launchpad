@@ -3,8 +3,8 @@ import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
-  theme: "light" | "dark";
   toggleTheme: () => void;
+  theme: "light" | "dark";
 }
 
 const links = [
@@ -23,7 +23,7 @@ const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 lg:px-8">
         <a href="#" className="flex-shrink-0">
           <img
-            src={theme === "dark" ? "/white-logo.svg" : "/logo.webp"}
+            src="/logo.webp"
             alt="Mega Media Networks"
             className="h-8 w-auto"
           />

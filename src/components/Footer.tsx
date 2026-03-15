@@ -1,10 +1,6 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 
-interface FooterProps {
-  theme: "light" | "dark";
-}
-
-const Footer = ({ theme }: FooterProps) => {
+const Footer = () => {
   return (
     <footer className="border-t border-border bg-background py-16">
       <div className="container mx-auto px-4 lg:px-8">
@@ -12,7 +8,7 @@ const Footer = ({ theme }: FooterProps) => {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <img
-              src={theme === "dark" ? "/white-logo.svg" : "/logo.webp"}
+              src="/logo.webp"
               alt="Mega Media Networks"
               className="mb-4 h-8 w-auto"
             />
