@@ -3,8 +3,8 @@ import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 interface NavbarProps {
-  theme: "light" | "dark";
   toggleTheme: () => void;
+  theme: "light" | "dark";
 }
 
 const links = [

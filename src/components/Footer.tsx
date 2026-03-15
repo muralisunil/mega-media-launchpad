@@ -1,10 +1,6 @@
 import { Mail, Phone, MapPin } from "lucide-react";
 
-interface FooterProps {
-  theme: "light" | "dark";
-}
-
-const Footer = ({ theme }: FooterProps) => {
+const Footer = () => {
   return (
     <footer className="border-t border-border bg-background py-16">
       <div className="container mx-auto px-4 lg:px-8">
