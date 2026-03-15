@@ -5,7 +5,7 @@ const Hero = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
 
   return (
-    <section className="relative flex min-h-screen items-center overflow-hidden bg-hero pt-16">
+    <section className="relative flex min-h-screen items-center overflow-hidden bg-hero" style={{ paddingTop: "calc(40px + 4rem)" }}>
       {/* Gradient orb */}
       <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-[120px]" />
       <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-accent/8 blur-[100px]" />
