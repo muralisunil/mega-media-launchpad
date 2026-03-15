@@ -12,7 +12,7 @@ const Footer = ({ theme }: FooterProps) => {
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <img
-              src={theme === "dark" ? "/white-logo.svg" : "/logo.webp"}
+              src="/logo.webp"
               alt="Mega Media Networks"
               className="mb-4 h-8 w-auto"
             />
