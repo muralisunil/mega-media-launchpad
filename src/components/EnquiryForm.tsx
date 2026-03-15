@@ -102,10 +102,16 @@ const EnquiryForm = () => {
                 <SelectContent>
                   <SelectItem value="seo">SEO & Search</SelectItem>
                   <SelectItem value="paid">Paid Media & PPC</SelectItem>
-                  <SelectItem value="social">Social Media</SelectItem>
-                  <SelectItem value="content">Content Strategy</SelectItem>
+                  <SelectItem value="social">Social Media Marketing</SelectItem>
+                  <SelectItem value="content-creation">Content Creation</SelectItem>
+                  <SelectItem value="content-strategy">Content Strategy</SelectItem>
+                  <SelectItem value="ai">AI Optimization</SelectItem>
                   <SelectItem value="web">Web Development</SelectItem>
                   <SelectItem value="analytics">Analytics & Reporting</SelectItem>
+                  <SelectItem value="influencer">Influencer Marketing</SelectItem>
+                  <SelectItem value="international">International SEO & Localization</SelectItem>
+                  <SelectItem value="brand">Brand Strategy & Identity</SelectItem>
+                  <SelectItem value="cro">Conversion Rate Optimization</SelectItem>
                   <SelectItem value="full">Full-Service Package</SelectItem>
                 </SelectContent>
               </Select>
@@ -116,10 +122,11 @@ const EnquiryForm = () => {
                   <SelectValue placeholder="Monthly Budget" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="under5k">Under $5,000</SelectItem>
-                  <SelectItem value="5k-15k">$5,000 – $15,000</SelectItem>
-                  <SelectItem value="15k-50k">$15,000 – $50,000</SelectItem>
-                  <SelectItem value="50k+">$50,000+</SelectItem>
+                  <SelectItem value="under1k">Under $1,000</SelectItem>
+                  <SelectItem value="1k-3k">$1,000 – $3,000</SelectItem>
+                  <SelectItem value="3k-5k">$3,000 – $5,000</SelectItem>
+                  <SelectItem value="5k-10k">$5,000 – $10,000</SelectItem>
+                  <SelectItem value="10k+">$10,000+</SelectItem>
                 </SelectContent>
               </Select>
             </div>
