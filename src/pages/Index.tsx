@@ -29,6 +29,7 @@ const Index = () => {
       <Footer />
       <Toaster />
       <ThemePicker />
+    </div>
   );
 };
 
