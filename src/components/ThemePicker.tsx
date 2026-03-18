@@ -94,11 +94,20 @@ const ThemePicker = () => {
   const applyTheme = (name: ThemeName) => {
     const t = themes[name];
     const root = document.documentElement;
+    const isDark = root.classList.contains("dark");
+    const mode = isDark ? "dark" : "light";
+
     root.style.setProperty("--primary", t["--primary"]);
     root.style.setProperty("--accent", t["--accent"]);
     root.style.setProperty("--ring", t["--ring"]);
+    root.style.setProperty("--background", t["--background"][mode]);
+    root.style.setProperty("--card", t["--card"][mode]);
+    root.style.setProperty("--muted", t["--muted"][mode]);
+    root.style.setProperty("--secondary", t["--secondary"][mode]);
+    root.style.setProperty("--border", t["--border"][mode]);
+    root.style.setProperty("--input", t["--border"][mode]);
+    root.style.setProperty("--hero-bg", t["--hero-bg"][mode]);
 
-    // Update gradient utilities
     const style = document.getElementById("theme-gradient-override") || (() => {
       const el = document.createElement("style");
       el.id = "theme-gradient-override";
@@ -106,6 +115,17 @@ const ThemePicker = () => {
       return el;
     })();
     style.textContent = `
+      .gradient-primary { background: ${t.gradient} !important; }
+      .gradient-text { background: ${t.gradient} !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; }
+    `;
+    setActive(name);
+  };
+
+  // Re-apply when light/dark toggles
+  const observer = new MutationObserver(() => {
+    if (active) applyTheme(active);
+  });
+
       .gradient-primary { background: ${t.gradient} !important; }
       .gradient-text { background: ${t.gradient} !important; -webkit-background-clip: text !important; -webkit-text-fill-color: transparent !important; background-clip: text !important; }
     `;
