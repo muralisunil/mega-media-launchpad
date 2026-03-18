@@ -10,6 +10,7 @@ import FAQ from "@/components/FAQ";
 import EnquiryForm from "@/components/EnquiryForm";
 import Footer from "@/components/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import ThemePicker from "@/components/ThemePicker";
 
 const Index = () => {
   const { theme, toggle } = useTheme();
